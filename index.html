@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 40px 20px;
+            font-family: sans-serif;
+        }
+        p{
+            font-size: 36px;
+            color:#e63946;
+            margin-bottom: 20px;
+
+        }
+        .button{
+            min-width: 100px;
+            min-height: 30px;
+            background-color: #2a9d8f;
+            color:#fff;
+            text-align: center;
+            padding:10px 28px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .button:hover{
+            opacity: .9;
+        }
+        .show{
+            width: 500px;
+            min-height: 500px;
+            background-color: #f1faee;
+            text-align: center;
+            color: #2a9d8f;
+            font-size: 28px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Nhấn vào nút bên dưới để lấy tọa độ của bạn!</p>
+        <div class="button">Tọa độ</div>
+        <div class="show"></div>
+    </div>
+
+    <script>
+  
+        let button = document.querySelector('.button');
+        let showArea = document.querySelector('.show');
+        function getLocation () {
+            if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else{
+                showArea.innerHTML = 'Trình duyệt của bạn không hỗ trợ Geolocation';
+            }
+        }
+        function showPosition(p){
+            //coordinates
+            showArea.innerHTML = `Vĩ độ: ${p.coords.latitude} <br>Kinh độ: ${p.coords.longitude}`;
+        }
+
+        button.addEventListener('click',getLocation);
+    </script>
+</body>
+</html>
